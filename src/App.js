@@ -1,10 +1,20 @@
-import logo from './logo.svg';
+import { Router, Route, Switch, Redirect } from 'react-router-dom';
+import { history } from './helpers/history';
+import { PrivateRoute } from './components/PrivateRoute';
+import  HomePage  from './components/HomePage/HomePage';
 import './App.css';
-import Login from './components/login/login';
+import LoginPage from './components/LoginPage/LoginPage';
 
 function App() {
   return (
-    <Login />
+    <Router history={history}>
+        <Switch>
+            <PrivateRoute exact path="/home" component={HomePage} />
+            <Route path="/login" component={LoginPage} />
+            {/* <Route path="/register" component={RegisterPage} /> */}
+            <Redirect from="*" to="/" />
+        </Switch>
+    </Router>
   );
 }
 
