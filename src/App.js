@@ -1,3 +1,4 @@
+import React from 'react';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import { history } from './helpers/history';
 import { PrivateRoute } from './components/PrivateRoute';
@@ -12,7 +13,7 @@ function App() {
             <PrivateRoute exact path="/home" component={HomePage} />
             <Route path="/login" component={LoginPage} />
             {/* <Route path="/register" component={RegisterPage} /> */}
-            <Redirect from="*" to="/" />
+            <Redirect from="*" to="/home" />
         </Switch>
     </Router>
   );
