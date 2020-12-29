@@ -4,7 +4,10 @@ import HeaderBar from './HeaderBar/HeaderBar';
 import DrawerBar from './DrawerBar/DrawerBar';
 import Hidden from '@material-ui/core/Hidden';
 import Paper from '@material-ui/core/Paper';
+import { Switch, Route} from "react-router-dom";
 import { createMuiTheme, makeStyles, ThemeProvider} from '@material-ui/core/styles';
+import CollectFeePage from '../HomePage/CollectFeePage/CollectFeePage';
+import StudentPage from '../HomePage/StudentPage/StudentPage';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -12,6 +15,25 @@ const useStyles = makeStyles(theme => ({
         width:'100vw',
         backgroundColor: '#cfe8fc'
     },
+    wrapper: {
+        display: 'flex',
+        flex: '1 1 auto',
+        overflow: 'hidden',
+        paddingTop: '60px',
+        [theme.breakpoints.up('sm')]: {
+          paddingLeft: '60px'
+        }
+      },
+      contentContainer: {
+        display: 'flex',
+        flex: '1 1 auto',
+        overflow: 'hidden'
+      },
+      content: {
+        flex: '1 1 auto',
+        height: '100%',
+        overflow: 'auto'
+      },
     mainDiv:{
         paddingTop: theme.spacing(12) + 'px',
         paddingLeft: theme.spacing(9) + 'px'
@@ -38,9 +60,8 @@ const theme = createMuiTheme({
     }
 });
 
-const HomePage = () =>{
+const HomePage = ({match}) =>{
     const classes = useStyles();
-
     return(
         <React.Fragment>
              <ThemeProvider theme={theme}>
@@ -48,23 +69,18 @@ const HomePage = () =>{
                 <Container className={classes.root} maxWidth={false}>
                 <HeaderBar></HeaderBar>
                 <Hidden only={'xs'}>
-                    <DrawerBar></DrawerBar>
+                    <DrawerBar match={match}></DrawerBar>
                 </Hidden>
-                <div className={classes.mainDiv}>
-                <Paper elevation={3} className={classes.paper}> 
-                    
-                    <Grid 
-                            container
-                            justify="space-around"
-                            alignItems="flex-end"
-                        >
-<p>CHeck</p>
-                            </Grid>
-                    </Paper>  
-                </div>
-                   
-
-                        
+                <div className={classes.wrapper}>
+                    <div className={classes.contentContainer}>
+                        <div className={classes.content}>
+                            <Switch>
+                                <Route path={match.url + "/collect-fee"}  component={CollectFeePage}/>
+                                <Route path={match.url + "/student"} component={StudentPage}/>
+                            </Switch>
+                        </div>
+                    </div>
+                </div>         
                 </Container>
             </ThemeProvider>
         </React.Fragment>

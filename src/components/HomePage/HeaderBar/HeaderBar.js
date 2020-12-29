@@ -185,7 +185,7 @@ export default function HeaderBar() {
           </IconButton>
           </Hidden>
           <Typography className={classes.title} variant="h6" noWrap>
-            IQRA MISSION HIGH SCHOOL
+            Test
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import {makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -6,10 +7,10 @@ import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import { Icon, InlineIcon } from '@iconify/react';
 import handHoldingUsd from '@iconify-icons/fa-solid/hand-holding-usd';
+import userGraduate from '@iconify-icons/fa-solid/user-graduate';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
 import Toolbar from '@material-ui/core/Toolbar';
 
 const drawerWidth = 240;
@@ -45,10 +46,15 @@ const useStyles = makeStyles((theme) => ({
     },
     drawerContainer: {
       overflow: 'none',
+      paddingTop: '20px'
+    },
+    link: {
+      textDecoration: 'none',
+      color: 'black'
     }
   }));
 
-  export default function DrawerBar() {
+  export default function DrawerBar({match}) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
@@ -81,18 +87,18 @@ const useStyles = makeStyles((theme) => ({
               <Toolbar />
               <div className={classes.drawerContainer} >
                 <List>
-                <Divider />
-                  {['Collect Fee', 'Starred', 'Send email', 'Drafts'].map((menu, index) => (
-                    <ListItem button key={menu}>
-                      <ListItemIcon>
-                      {{
-                        'Collect Fee' : <Icon icon={handHoldingUsd} color="#00ff00" width="48" height="48" />,
-                        Starred : <MailIcon />
-                      }[menu]}
-
-                      </ListItemIcon>
-                      <ListItemText primary={menu} />
-                    </ListItem>
+                  {['Collect Fee', 'Student', 'Send email', 'Drafts'].map((menu, index) => (
+                    <Link to={match.url + (('Collect Fee' === menu) ? "/collect-fee" :"/student")} className={classes.link} key={menu}>
+                      <ListItem button key={menu}>
+                        <ListItemIcon>
+                          {{
+                            'Collect Fee' : <Icon icon={handHoldingUsd} color="#00ff00" width="48" height="48"/>,
+                            'Student' : <Icon icon={userGraduate} color="#0000ff" width="48" height="48"/>
+                          }[menu]}
+                        </ListItemIcon>
+                        <ListItemText primary={menu} />
+                      </ListItem>
+                    </Link>
                   ))}
                 </List>
                 <Divider />

@@ -10,10 +10,10 @@ function App() {
   return (
     <Router history={history}>
         <Switch>
-            <PrivateRoute exact path="/home" component={HomePage} />
-            <Route path="/login" component={LoginPage} />
-            {/* <Route path="/register" component={RegisterPage} /> */}
-            <Redirect from="*" to="/home" />
+          <PrivateRoute path="/home" component={HomePage} />
+          <Route path="/login" component={LoginPage} />
+          {/* <Route path="/register" component={RegisterPage} /> */}
+          <Redirect from="/" to="/home" /> 
         </Switch>
     </Router>
   );
